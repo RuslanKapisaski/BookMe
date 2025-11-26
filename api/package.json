@@ -6,8 +6,11 @@
     "start": "node  src/server.js",
     "dev": "node --watch src/server.js"
   },
-  "type": "commonjs",
+  "type": "module",
   "author": "Ruslan Kapisaski",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

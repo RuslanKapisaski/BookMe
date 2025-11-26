@@ -9,3 +9,12 @@
   - [x] Add start file (in src folder)
   - [x] Add dev script ('node --watch src/index.js')
   - [x] Config debbuger
+
+### 2. Express
+
+- [x] Install express
+- [x] Initialize express server
+- [x] Add server middlewares
+  - [x] express.json – parse JSON body of requests
+  - [x] express.urlencoded – parse HTML form data
+  - [x] cors – enable Cross-Origin Resource Sharing
