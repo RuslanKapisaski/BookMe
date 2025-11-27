@@ -10,6 +10,8 @@
   - [x] Add dev script ('node --watch src/index.js')
   - [x] Config debbuger
 
+---
+
 ### 2. Express
 
 - [x] Install express
@@ -18,6 +20,8 @@
   - [x] express.json – parse JSON body of requests
   - [x] express.urlencoded – parse HTML form data
   - [x] cors – enable Cross-Origin Resource Sharing
+
+---
 
 ### 3. Database
 
@@ -32,3 +36,11 @@
   - [x] Add Review model
   - [x] Add Booking model
     - [x] Create custom validator for checking end and start dates
+
+---
+
+### 5. Register
+
+- [x] Create user service
+  - [x] Validate if user exists
+  - [x] Generate token
