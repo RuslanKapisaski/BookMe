@@ -1,10 +1,6 @@
 import Property from "../models/Property.js";
 
 export default {
-  create(propertyData, ownerId) {
-    return Property.create({ ...propertyData, ownerId });
-  },
-
   getOneById(propertyId) {
     return Property.findById(propertyId).populate([
       "owner",
@@ -25,7 +21,11 @@ export default {
     return Property.find({ owner: ownerId });
   },
 
-  edit(propertyData, propertyId) {
+  create(propertyData) {
+    return Property.create(propertyData);
+  },
+
+  edit(propertyId, propertyData) {
     return Property.findByIdAndUpdate(propertyId, propertyData);
   },
 

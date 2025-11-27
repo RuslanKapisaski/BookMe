@@ -63,3 +63,5 @@
 ### 6. Properties
 
 - [x] Create property service
+- [x] Create property controller
+
