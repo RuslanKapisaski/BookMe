@@ -22,7 +22,8 @@ const userSchema = new Schema(
       enum: ["user", "owner"],
       default: "user",
     },
-    properties: [{ property: Types.ObjectId, ref: "Property" }],
+    properties: [{ type: Types.ObjectId, ref: "Property" }],
+    bookings: [{ type: Types.ObjectId, ref: "Booking" }],
   },
 
   {
