@@ -22,7 +22,9 @@ const userSchema = new Schema(
       enum: ["user", "owner"],
       default: "user",
     },
+    properties: [{ property: ObjectId, ref: "Property" }],
   },
+
   {
     timestamps: true,
   }
