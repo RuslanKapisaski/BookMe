@@ -51,6 +51,12 @@ const propertySchema = new Schema(
         ref: "Review",
       },
     ],
+    bookings: [
+      {
+        type: Types.ObjectId,
+        ref: "Booking",
+      },
+    ],
   },
   { timestamps: true }
 );
