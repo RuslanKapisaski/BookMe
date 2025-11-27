@@ -51,3 +51,10 @@
 - [x] Validate if user exists
 - [x] Validate if user password is the same
 - [x] Generate token
+
+### 6. Controllers
+
+- [x] Create user controller
+  - [x] Create register endpoints
+  - [x] Create login endpoints
+  - [x] Install cookie-parser for creating cookies
