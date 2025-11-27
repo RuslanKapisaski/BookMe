@@ -24,3 +24,7 @@
 - [x] Install Mongoose
 - [x] Connect to databse
 - [x] Error hadling (try-catch) on connecting db
+- [x] Add basic models:
+  - [x] Add User model
+    - [x] Create virtual repeatPassword on pre validate and check for missmatch
+    - [x] Hash password on pre save(bcrypt)
