@@ -55,3 +55,5 @@ userController.post("api/auth/logout", async (req, res) => {
     message: "Logged out successfuly",
   });
 });
+
+export default userController;
