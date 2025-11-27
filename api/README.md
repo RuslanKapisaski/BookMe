@@ -44,3 +44,10 @@
 - [x] Create user service
   - [x] Validate if user exists
   - [x] Generate token
+
+### 6. Login
+
+- [x] Create login service
+- [x] Validate if user exists
+- [x] Validate if user password is the same
+- [x] Generate token
