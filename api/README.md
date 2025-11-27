@@ -53,8 +53,13 @@
 - [x] Generate token
 
 ### 6. Controllers
+### 6. Users
 
 - [x] Create user controller
   - [x] Create register endpoints
   - [x] Create login endpoints
   - [x] Install cookie-parser for creating cookies
+
+### 6. Properties
+
+- [x] Create property service
