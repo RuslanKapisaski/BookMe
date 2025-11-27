@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userService from "../services/userService.js";
+import getErrorMessage from "../utils/errorUtils.js";
 
 const userController = Router();
 
@@ -22,8 +23,9 @@ userController.post("/api/auth/register", async (req, res) => {
       user: { username, email },
     });
   } catch (error) {
+    const errorMessage = getErrorMessage(error);
     res.status(400).json({
-      error: error.message,
+      error: errorMessage,
       user: { username, email },
     });
   }
@@ -42,8 +44,9 @@ userController.post("/api/auth/login", async (req, res) => {
       user: { username, email },
     });
   } catch (error) {
+    const errorMessage = getErrorMessage(error);
     res.status(401).json({
-      error: error.message,
+      error: errorMessage,
       user: { username, password },
     });
   }
