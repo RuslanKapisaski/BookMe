@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { JWT_SECRET } from "../constants/constants.js";
 import User from "../models/User.js";
+import generateAuthToken from "../utils/tokenUtils.js";
 
 export default {
   async register(username, email, password, repeatPassword) {
@@ -20,14 +21,6 @@ export default {
     });
 
     //generate token
-    const payload = {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-    };
-
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2h" });
-
-    return token;
+    const token = generateAuthToken(createdUser);
   },
 };
