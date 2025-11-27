@@ -28,3 +28,7 @@
   - [x] Add User model
     - [x] Create virtual repeatPassword on pre validate and check for missmatch
     - [x] Hash password on pre save(bcrypt)
+  - [x] Add Property model
+  - [x] Add Review model
+  - [x] Add Booking model
+    - [x] Create custom validator for checking end and start dates
