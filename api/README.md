@@ -18,3 +18,9 @@
   - [x] express.json – parse JSON body of requests
   - [x] express.urlencoded – parse HTML form data
   - [x] cors – enable Cross-Origin Resource Sharing
+
+### 3. Database
+
+- [x] Install Mongoose
+- [x] Connect to databse
+- [x] Error hadling (try-catch) on connecting db
