@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const userSchema = new Schema(
   {
@@ -22,7 +22,7 @@ const userSchema = new Schema(
       enum: ["user", "owner"],
       default: "user",
     },
-    properties: [{ property: ObjectId, ref: "Property" }],
+    properties: [{ property: Types.ObjectId, ref: "Property" }],
   },
 
   {
