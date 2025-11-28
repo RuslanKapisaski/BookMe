@@ -67,4 +67,5 @@
 ### 7. Reviews
 
 - [x] Create review service
+- [x] Create review controller
 

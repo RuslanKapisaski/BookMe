@@ -19,7 +19,7 @@ export default {
     return Review.find().sort({ _id: -1 });
   },
 
-  getAllByOwner(userId) {
+  getAllByUser(userId) {
     return Review.find({ user: userId });
   },
 
