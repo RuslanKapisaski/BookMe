@@ -69,3 +69,7 @@
 - [x] Create review service
 - [x] Create review controller
 
+### 6. Bookings
+
+- [x] Create booking service
+- [x] Create booking controller
