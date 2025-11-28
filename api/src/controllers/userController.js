@@ -45,12 +45,14 @@ userController.post("/login", async (req, res) => {
       message: "Successful login",
       token,
       user: { username, email },
+      user: { email },
     });
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     res.status(401).json({
       error: errorMessage,
       user: { username, password },
+      user: { email },
     });
   }
 });
