@@ -1,4 +1,5 @@
 import { model, Schema, Types } from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
   {
@@ -30,6 +31,10 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.virtual("repeatPassword").set(function (value) {
+  this._repeatPassword = value;
+});
 
 userSchema.pre("validate", function () {
   if (this.isNew && this.password !== this._repeatPassword) {
