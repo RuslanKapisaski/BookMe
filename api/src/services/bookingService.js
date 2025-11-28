@@ -28,7 +28,10 @@ export default {
   },
 
   edit(bookingId, bookingData) {
-    return Booking.findByIdAndUpdate(bookingId, bookingData);
+    return Booking.findByIdAndUpdate(bookingId, bookingData, {
+      new: true,
+      runValidators: true,
+    });
   },
 
   async remove(userId, bookingId) {

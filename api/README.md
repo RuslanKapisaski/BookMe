@@ -73,3 +73,7 @@
 
 - [x] Create booking service
 - [x] Create booking controller
+
+##### Nice to have
+
+- [x] Patch functionality

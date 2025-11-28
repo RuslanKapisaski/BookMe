@@ -111,6 +111,26 @@ propertyController.put("/:propertyId", authMiddleware, async (req, res) => {
   }
 });
 
+propertyController.patch("/:propertyId", authMiddleware, async (req, res) => {
+  try {
+    const propertyId = req.params.propertyId;
+    const updates = req.body;
+    const updatedProperty = await propertyService.edit(propertyId, updates);
+
+    if (!updatedProperty) {
+      res.status(404).json({ message: "Property not found" });
+    }
+
+    res.status(200).json({
+      message: "Property updated successfuly",
+      property: updatedProperty,
+    });
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
 propertyController.delete("/:propertyId", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;

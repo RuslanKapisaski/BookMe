@@ -107,6 +107,26 @@ reviewController.put("/:reviewId", authMiddleware, async (req, res) => {
   }
 });
 
+reviewController.patch("/:reviewId", authMiddleware, async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const updates = req.body;
+    const updatedReview = await reviewService.edit(reviewId, updates);
+
+    if (!updatedReview) {
+      res.status(404).json({ message: "Review not found" });
+    }
+
+    res.status(200).json({
+      message: "Review updated successfuly",
+      review: updatedReview,
+    });
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
 reviewController.delete("/:reviewId", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;

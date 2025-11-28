@@ -28,7 +28,10 @@ export default {
   },
 
   edit(reviewId, reviewData) {
-    return Review.findByIdAndUpdate(reviewId, reviewData);
+    return Review.findByIdAndUpdate(reviewId, reviewData, {
+      new: true,
+      runValidators: true,
+    });
   },
 
   async remove(userId, reviewId) {

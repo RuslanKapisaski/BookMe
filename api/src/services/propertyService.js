@@ -26,7 +26,10 @@ export default {
   },
 
   edit(propertyId, propertyData) {
-    return Property.findByIdAndUpdate(propertyId, propertyData);
+    return Property.findByIdAndUpdate(propertyId, propertyData, {
+      new: true,
+      runValidators: true,
+    });
   },
 
   async remove(userId, propertyId) {

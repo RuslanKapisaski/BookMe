@@ -106,6 +106,26 @@ bookingController.put("/:bookingId", authMiddleware, async (req, res) => {
   }
 });
 
+bookingController.patch("/:bookingId", authMiddleware, async (req, res) => {
+  try {
+    const bookingId = req.params.bookingId;
+    const updates = req.body;
+    const updatedBooking = await bookingService.edit(bookingId, updates);
+
+    if (!updatedBooking) {
+      res.status(404).json({ message: "Booking not found" });
+    }
+
+    res.status(200).json({
+      message: "Booking updated successfuly",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
 bookingController.delete("/:bookingId", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;
