@@ -15,9 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
 app.use(router);
-
+app.use((req, res) => {
+  console.log(`Method: ${req.method.toUpperCase()} on ${req.url}`);
+});
 app.listen(3030, () =>
   console.log(`Server is listening on http://localhost:${port}`)
 );
