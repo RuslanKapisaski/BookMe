@@ -1,7 +1,7 @@
 import Property from "../models/Property.js";
 
 export default {
-  getOneById(propertyId) {
+  getById(propertyId) {
     return Property.findById(propertyId).populate([
       "owner",
       "reviews",

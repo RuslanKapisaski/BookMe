@@ -52,7 +52,6 @@
 - [x] Validate if user password is the same
 - [x] Generate token
 
-### 6. Controllers
 ### 6. Users
 
 - [x] Create user controller
@@ -64,4 +63,8 @@
 
 - [x] Create property service
 - [x] Create property controller
+
+### 7. Reviews
+
+- [x] Create review service
 
