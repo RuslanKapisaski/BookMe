@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 import getErrorMessage from "../utils/errorUtils.js";
 import bookingService from "../services/bookingService.js";

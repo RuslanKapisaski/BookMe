@@ -8,9 +8,9 @@ import bookingController from "./controllers/bookingController.js";
 const router = Router();
 
 //endpoints
-router("/api/auth", userController);
-router("/api/properties", propertyController);
-router("/api/reviews", reviewController);
-router("/api/bookings", bookingController);
+router.use("/api/auth", userController);
+router.use("/api/properties", propertyController);
+router.use("/api/reviews", reviewController);
+router.use("/api/bookings", bookingController);
 
 export default router;
