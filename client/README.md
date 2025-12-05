@@ -6,6 +6,14 @@
 - [x] Add BrowerRouter Component
 - [x] Add routes
 
+---
+
 ### 2. Tailwind
 
 - [x] Tailwind setup
+
+---
+
+### 3. Authentication
+
+- [x] Create UserContext
