@@ -1,26 +1,62 @@
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
+import useForm from "../../hooks/useForm";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { registerHandler } = useContext(UserContext);
+
+  const registerSubmitHandler = ({
+    username,
+    email,
+    password,
+    repeatPassword,
+  }) => {
+    if (!username) {
+      return alert("Username is required!");
+    }
+    if (!email || !password) {
+      return alert("Email and password are required!");
+    }
+
+    if (password !== repeatPassword) {
+      return alert("Passwords missmatch!");
+    }
+    registerHandler({ username, email, password, repeatPassword });
+    navigate("/");
+  };
+
+  const { formAction, register, error } = useForm(registerSubmitHandler, {
+    username: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+
   return (
     <section className="flex justify-center mt-10">
-      <form className="w-full max-w-sm max-h-200 bg-sky-900 shadow-xl rounded-lg p-8">
+      <form
+        action={formAction}
+        className="w-full max-w-sm max-h-200 bg-sky-900 shadow-xl rounded-lg p-8"
+      >
         <h2 className="text-2xl font-bold text-center mb-6 text-white">
           Create an Account
         </h2>
 
-        {/* {error && (
+        {error && (
           <p className="text-red-500 font-medium text-sm mb-3 text-center">
-            {error}
+            {error.message}
           </p>
-        )} */}
+        )}
 
         <label className="block mb-3">
           <span className="text-white">Username</span>
           <input
-            name="username"
             type="text"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
+            {...register("username")}
             required
           />
         </label>
@@ -28,10 +64,10 @@ export default function Register() {
         <label className="block mb-3">
           <span className="text-white">Email</span>
           <input
-            name="email"
             type="email"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
+            {...register("email")}
             required
           />
         </label>
@@ -39,10 +75,10 @@ export default function Register() {
         <label className="block mb-3">
           <span className="text-white">Password</span>
           <input
-            name="password"
             type="password"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
+            {...register("password")}
             required
           />
         </label>
@@ -50,10 +86,10 @@ export default function Register() {
         <label className="block mb-5">
           <span className="text-white">Repeat Password</span>
           <input
-            name="repeatPassword"
             type="password"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
+            {...register("repeatPassword")}
             required
           />
         </label>
@@ -66,7 +102,7 @@ export default function Register() {
         </button>
 
         <p className="text-center text-sm text-gray-200 mt-4">
-          Already have an account?{" "}
+          Already have an account?
           <Link to="/login" className="text-blue-400 hover:underline">
             Login here
           </Link>
