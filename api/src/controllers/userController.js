@@ -11,7 +11,7 @@ userController.post("/register", async (req, res) => {
   const { username, email, password, repeatPassword } = req.body;
 
   try {
-    const token = await userService.register(
+    const { user, token } = await userService.register(
       username,
       email,
       password,
@@ -23,13 +23,13 @@ userController.post("/register", async (req, res) => {
     res.status(201).json({
       message: "Successful registration",
       token,
-      user: { username, email },
+      user: { username: user.username, email: user.email },
     });
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     res.status(400).json({
       error: errorMessage,
-      user: { username, email },
+      user: { email },
     });
   }
 });
@@ -37,21 +37,19 @@ userController.post("/register", async (req, res) => {
 userController.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const token = await userService.login(email, password);
+    const { user, token } = await userService.login(email, password);
 
     res.cookie("auth", token);
 
-    res.status(201).json({
+    res.status(200).json({
       message: "Successful login",
       token,
-      user: { username, email },
-      user: { email },
+      user: { username: user.username, email: user.email },
     });
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     res.status(401).json({
       error: errorMessage,
-      user: { username, password },
       user: { email },
     });
   }
