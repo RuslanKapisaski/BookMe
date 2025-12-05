@@ -21,7 +21,7 @@ export default {
     //generate token
     const token = generateAuthToken(createdUser);
 
-    return { user, token };
+    return { user: createdUser, token };
   },
 
   async login(email, password) {
