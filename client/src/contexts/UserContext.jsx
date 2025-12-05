@@ -1,82 +1,85 @@
 import { createContext, useContext, useState } from "react";
 
-export const UserContext = createContext({
-  user: null,
-  isAuthenticated: false,
-  registerHandler() {},
-  loginHandler() {},
-  logoutHandler() {},
-});
+export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  function registerHandler(userName, email, password, repeatPassword) {
-    const newUser = { userName, email, password, repeatPassword };
+  async function registerHandler(values) {
+    console.log(values);
 
-    fetch("http://localhost:3030/api/auth/register", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(newUser),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setUser(result.user);
-        return result.user;
-      })
-      .catch((err) => alert(err.message || "Register failed"));
+    try {
+      const res = await fetch("http://localhost:3030/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(res);
+
+        throw new Error(data.error);
+      }
+
+      setUser(data.user);
+
+      return { user: data.user };
+    } catch (err) {
+      throw err;
+    }
   }
 
-  function loginHandler(email, password) {
-    const user = { email, password };
+  // LOGIN
+  async function loginHandler(values) {
+    try {
+      const res = await fetch("http://localhost:3030/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(values),
+      });
 
-    fetch("http://localhost:3030/api/auth/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        const userData = result.user;
-        setUser(userData);
-        return userData;
-      })
-      .catch((err) => alert(err.message || "Login failed"));
+      const data = await res.json();
+
+      if (!res.ok) {
+        return { error: data.error || "Login failed" };
+      }
+
+      setUser(data.user);
+      return { user: data.user };
+    } catch (err) {
+      throw err;
+    }
   }
 
-  function logoutHandler() {
-    const options = {
+  // LOGOUT
+  async function logoutHandler() {
+    await fetch("http://localhost:3030/api/auth/logout", {
       method: "POST",
       credentials: "include",
-    };
+    });
 
-    return fetch("http://localhost:3030/api/auth/logout", options).finally(() =>
-      setUser(null)
-    );
+    setUser(null);
   }
-
-  const userContextValues = {
-    user,
-    isAuthenticated: !!user?.accessToken,
-    registerHandler,
-    loginHandler,
-    logoutHandler,
-  };
 
   return (
-    <UserContext.Provider value={userContextValues}>
+    <UserContext.Provider
+      value={{
+        user,
+        isAuthenticated: !!user,
+        registerHandler,
+        loginHandler,
+        logoutHandler,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 }
 
 export function useUserContext() {
-  const contextData = useContext(UserContext);
-  return contextData;
+  return useContext(UserContext);
 }
