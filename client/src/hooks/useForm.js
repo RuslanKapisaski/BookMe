@@ -1,0 +1,41 @@
+import { useState } from "react";
+
+export default function useForm(callback, initialState) {
+  const [values, setValues] = useState(initialState);
+  const [error, setError] = useState(null);
+
+  const changeHandler = (e) => {
+    setValues((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const formAction = async () => {
+    try {
+      await callback(values);
+    } catch (error) {
+      console.log("error:", error);
+
+      console.log(error);
+      console.log(error.message);
+
+      setError(error);
+    }
+  };
+
+  const register = (fieldName) => {
+    return {
+      name: fieldName,
+      onChange: changeHandler,
+      value: values[fieldName],
+    };
+  };
+
+  return {
+    values,
+    error,
+    formAction,
+    register,
+  };
+}
