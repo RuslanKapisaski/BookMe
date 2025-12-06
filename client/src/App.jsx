@@ -4,6 +4,8 @@ import Footer from "./components/footer/Footer";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import Logout from "./components/logout/Logout";
+import Home from "./components/home/Home";
+import AddProperty from "./components/add-property/AddProperty";
 
 function App() {
   return (
