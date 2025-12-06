@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { extractData } from "../utils/extractData";
 
 const baseUrl = "http://localhost:3030";
 
@@ -26,15 +27,13 @@ export default function useApi() {
 
     const response = await fetch(`${baseUrl}${url}`, options);
 
-    console.log(response);
-
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
       throw new Error(result.message || "Request failed");
     }
 
-    return result;
+    return extractData(result);
   };
 
   return { request };
