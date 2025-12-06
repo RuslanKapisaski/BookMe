@@ -22,7 +22,7 @@ export function UserProvider({ children }) {
         throw new Error(data.error);
       }
 
-      setUser(data.user);
+      setUser({ ...data.user, accessToken: data.accessToken });
 
       return { user: data.user };
     } catch (err) {
@@ -30,7 +30,6 @@ export function UserProvider({ children }) {
     }
   }
 
-  // LOGIN
   async function loginHandler(values) {
     try {
       const res = await fetch("http://localhost:3030/api/auth/login", {
@@ -45,8 +44,8 @@ export function UserProvider({ children }) {
       if (!res.ok) {
         return { error: data.error || "Login failed" };
       }
-
-      setUser(data.user);
+    
+      setUser({ ...data.user, accessToken: data.token });
       return { user: data.user };
     } catch (err) {
       throw err;

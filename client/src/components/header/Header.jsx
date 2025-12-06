@@ -17,7 +17,10 @@ export default function Header() {
               </Link>
               {isAuthenticated ? (
                 <div>
-                  <Link to="/about" className="hover:text-gray-200 p-2">
+                  <Link
+                    to="/properties/add"
+                    className="hover:text-gray-200 p-2"
+                  >
                     Add property
                   </Link>
 

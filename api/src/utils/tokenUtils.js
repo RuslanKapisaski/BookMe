@@ -4,7 +4,7 @@ import { JWT_SECRET } from "../constants/constants.js";
 
 export default function generateAuthToken(user) {
   const payload = {
-    id: user.id,
+    _id: user._id,
     username: user.username,
     email: user.email,
   };
@@ -13,4 +13,3 @@ export default function generateAuthToken(user) {
 
   return token;
 }
-

@@ -14,8 +14,9 @@ export default function useForm(callback, initialState) {
   const formAction = async () => {
     try {
       await callback(values);
+      setError(null);
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 
