@@ -24,6 +24,10 @@ export default function Header() {
                   <Link to="/profile" className="hover:text-gray-200 p-2">
                     Profile
                   </Link>
+
+                  <Link to="/logout" className="hover:text-gray-200 p-2">
+                    Logout
+                  </Link>
                 </div>
               ) : (
                 <div>
@@ -40,7 +44,6 @@ export default function Header() {
                   </Link>
                 </div>
               )}
-              {user && <p>{user.email}</p>}
               {user && (
                 <p className="text-sky-800 hover:text-sky-500">{user.email}</p>
               )}
