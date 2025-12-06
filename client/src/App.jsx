@@ -11,6 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<h1>Home page</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
