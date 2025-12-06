@@ -1,17 +1,16 @@
 import { Link } from "react-router";
 
-export default function LatestProperties({ latest }) {
-
+export default function Properties({ properties }) {
   return (
     <section className="max-w-6xl mx-auto mt-16 px-4 pb-16">
       <h2 className="text-3xl font-bold mb-6">Latest Properties</h2>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {latest.length === 0 && (
+        {properties.length === 0 && (
           <p className="text-gray-300">No properties yet.</p>
         )}
 
-        {latest.map((property) => (
+        {properties.map((property) => (
           <div
             key={property._id}
             className="bg-sky-900 p-4 rounded-xl shadow-lg overflow-hidden"

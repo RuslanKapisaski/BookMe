@@ -6,6 +6,7 @@ import Login from "./components/login/Login";
 import Logout from "./components/logout/Logout";
 import Home from "./components/home/Home";
 import AddProperty from "./components/add-property/AddProperty";
+import Catalog from "./components/catalog/Catalog";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/catalog" element={<Logout />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route path="/properties/add" element={<AddProperty />} />
       </Routes>
       <Footer />

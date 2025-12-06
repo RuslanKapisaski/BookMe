@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Hero from "./Hero";
 import LatestProperties from "./LatestProperties";
 import useApi from "../../hooks/useApi";
+import Properties from "../properties/Properties";
 
 export default function Home() {
   const [latest, setLatest] = useState([]);
@@ -29,7 +30,7 @@ export default function Home() {
       {/* POPULAR DESTINATIONS */}
 
       {/* LATEST PROPERTIES */}
-      <LatestProperties latest={latest} />
+      <Properties properties={latest} />
     </div>
   );
 }
