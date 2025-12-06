@@ -7,19 +7,20 @@ import Logout from "./components/logout/Logout";
 import Home from "./components/home/Home";
 import AddProperty from "./components/add-property/AddProperty";
 import Catalog from "./components/catalog/Catalog";
+import Details from "./components/details/Details";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<h1>Home page</h1>} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/properties/add" element={<AddProperty />} />
+        <Route path="/properties/:propertyId/details" element={<Details />} />
       </Routes>
       <Footer />
     </>
