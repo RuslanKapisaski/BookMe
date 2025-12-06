@@ -6,8 +6,6 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
   async function registerHandler(values) {
-    console.log(values);
-
     try {
       const res = await fetch("http://localhost:3030/api/auth/register", {
         method: "POST",
@@ -55,7 +53,6 @@ export function UserProvider({ children }) {
     }
   }
 
-  // LOGOUT
   async function logoutHandler() {
     await fetch("http://localhost:3030/api/auth/logout", {
       method: "POST",

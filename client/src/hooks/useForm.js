@@ -15,11 +15,6 @@ export default function useForm(callback, initialState) {
     try {
       await callback(values);
     } catch (error) {
-      console.log("error:", error);
-
-      console.log(error);
-      console.log(error.message);
-
       setError(error);
     }
   };

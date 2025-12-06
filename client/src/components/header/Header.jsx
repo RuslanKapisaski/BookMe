@@ -41,6 +41,9 @@ export default function Header() {
                 </div>
               )}
               {user && <p>{user.email}</p>}
+              {user && (
+                <p className="text-sky-800 hover:text-sky-500">{user.email}</p>
+              )}
             </nav>
           </div>
         </div>
