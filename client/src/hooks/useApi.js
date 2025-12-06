@@ -4,18 +4,27 @@ import { extractData } from "../utils/extractData";
 
 const baseUrl = "http://localhost:3030";
 
-export default function useApi() {
+export default function useApi(url, initialState) {
   const { user, isAuthenticated } = useContext(UserContext);
+  const [data, setData] = useState(initialState);
 
-  const request = async (url, method = "GET", body = null, config = {}) => {
+  useEffect(() => {
+    if (!url) return;
+
+    request(url)
+      .then((result) => setData(result))
+      .catch((err) => alert(err.message));
+  }, [url]);
+
+  const request = async (url, method = "GET", data = null, config = {}) => {
     let options = {
       method,
       headers: {},
     };
 
-    if (body) {
+    if (data) {
       options.headers["Content-Type"] = "application/json";
-      options.body = JSON.stringify(body);
+      options.body = JSON.stringify(data);
     }
 
     if (isAuthenticated) {
@@ -36,5 +45,5 @@ export default function useApi() {
     return extractData(result);
   };
 
-  return { request };
+  return { request, data };
 }
