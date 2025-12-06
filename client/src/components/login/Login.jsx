@@ -8,15 +8,16 @@ export default function Login() {
 
   const { loginHandler } = useContext(UserContext);
 
-  const loginSubmitHandler = ({ email, password }) => {
+  const loginSubmitHandler = async ({ email, password }) => {
     if (!email) {
-      return alert("Email is required");
+      throw new Error("Email is required");
     }
     if (!password) {
-      return alert("Password is required");
+      throw new Error("Password is required");
     }
 
-    loginHandler({ email, password });
+    await loginHandler({ email, password });
+
     navigate("/");
   };
 
@@ -35,13 +36,6 @@ export default function Login() {
           <h2 className="text-2xl font-bold text-center mb-6 text-white">
             Login
           </h2>
-
-          {/* Error message */}
-          {error && (
-            <p className="text-red-500 font-medium text-sm mb-3 text-center">
-              {error}
-            </p>
-          )}
 
           <label className="block mb-4">
             <span className="text-white">Email</span>
@@ -71,6 +65,13 @@ export default function Login() {
           >
             Login
           </button>
+
+          {/* Error message */}
+          {error && (
+            <p className="text-red-500 font-medium text-sm mb-3 text-center">
+              {error}
+            </p>
+          )}
 
           <p className="text-center text-sm text-gray-200 mt-4">
             Don't have an account?{" "}

@@ -17,9 +17,7 @@ export function UserProvider({ children }) {
       const data = await res.json();
 
       if (!res.ok) {
-        console.log(res);
-
-        throw new Error(data.error);
+        throw data;
       }
 
       setUser({ ...data.user, accessToken: data.accessToken });
@@ -42,9 +40,9 @@ export function UserProvider({ children }) {
       const data = await res.json();
 
       if (!res.ok) {
-        return { error: data.error || "Login failed" };
+        throw data;
       }
-    
+
       setUser({ ...data.user, accessToken: data.token });
       return { user: data.user };
     } catch (err) {

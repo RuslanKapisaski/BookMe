@@ -7,23 +7,24 @@ export default function Register() {
   const navigate = useNavigate();
   const { registerHandler } = useContext(UserContext);
 
-  const registerSubmitHandler = ({
+  const registerSubmitHandler = async ({
     username,
     email,
     password,
     repeatPassword,
   }) => {
     if (!username) {
-      return alert("Username is required!");
+      throw new Error("Username is required!");
     }
     if (!email || !password) {
-      return alert("Email and password are required!");
+      throw new Error("Email and password are required!");
     }
 
     if (password !== repeatPassword) {
-      return alert("Passwords missmatch!");
+      throw new Error("Passwords mismatch!");
     }
-    registerHandler({ username, email, password, repeatPassword });
+    await registerHandler({ username, email, password, repeatPassword });
+
     navigate("/");
   };
 
@@ -46,7 +47,7 @@ export default function Register() {
 
         {error && (
           <p className="text-red-500 font-medium text-sm mb-3 text-center">
-            {error.message}
+            {error}
           </p>
         )}
 

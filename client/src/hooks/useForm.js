@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 export default function useForm(callback, initialState) {
   const [values, setValues] = useState(initialState);
@@ -16,7 +17,8 @@ export default function useForm(callback, initialState) {
       await callback(values);
       setError(null);
     } catch (error) {
-      setError(error.message);
+      const errorMessage = getErrorMessage(error);
+      setError(errorMessage);
     }
   };
 
