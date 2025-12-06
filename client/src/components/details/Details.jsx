@@ -1,12 +1,13 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useApi from "../../hooks/useApi";
 import { useUserContext } from "../../contexts/UserContext";
 
 export default function Details() {
   const { propertyId } = useParams();
   const { user } = useUserContext();
+  const navigate = useNavigate();
 
-  const { data: property } = useApi(
+  const { data: property, request } = useApi(
     `/api/properties/${propertyId}/details`,
     {}
   );
@@ -29,7 +30,7 @@ export default function Details() {
 
       navigate("/catalog");
     } catch (err) {
-      alert(`Unable to delete ${property.title}`, err.message);
+      alert(`Unable to delete ${property.name}: ${err.message}`);
     }
   }
 

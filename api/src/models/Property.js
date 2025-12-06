@@ -18,7 +18,7 @@ const propertySchema = new Schema(
       type: String,
       required: [true, "Address is required!"],
       minLength: [2, "Address should be at least 2 characters long!"],
-      maxLength: [20, "Address should be below 20 characters long!"],
+      maxLength: [60, "Address should be below 20 characters long!"],
     },
     pricePerNight: {
       type: Number,
