@@ -1,8 +1,12 @@
 import { useNavigate, useParams } from "react-router";
+
 import useApi from "../../hooks/useApi";
 import { useUserContext } from "../../contexts/UserContext";
+import Booking from "../../booking/Booking";
+import { useState } from "react";
 
 export default function Details() {
+  const [showBooking, setShowBooking] = useState(false);
   const { propertyId } = useParams();
   const { user } = useUserContext();
   const navigate = useNavigate();
@@ -11,10 +15,6 @@ export default function Details() {
     `/api/properties/${propertyId}/details`,
     {}
   );
-
-  function refreshHandler() {
-    setRefresh((state) => !state);
-  }
 
   async function deleteHandler() {
     const isConfirmed = confirm(
@@ -34,6 +34,10 @@ export default function Details() {
     }
   }
 
+  async function bookHandler() {
+    setShowBooking(true);
+  }
+
   console.log(user?.email);
   console.log(property?.owner?.email);
 
@@ -49,12 +53,22 @@ export default function Details() {
             {property.pricePerNight} BGN / night
           </div>
           <p className="mt-5 text-gray-800">{property.description}</p>
-          {user && (
-            <button className="mt-6 bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-800">
-              Book Now
-            </button>
-          )}
+          <div className="flex items-start gap-8 mt-2">
+            {user && (
+              <button
+                className="mt-6 bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-800"
+                onClick={bookHandler}
+              >
+                Book Now
+              </button>
+            )}
 
+            {showBooking && (
+              <div className="mt-1">
+                <Booking property={property} />
+              </div>
+            )}
+          </div>
           {user?.email === property?.owner?.email ? (
             <button
               className="mt-6 m-1 bg-red-700 text-white px-6 py-3 rounded-lg hover:bg-red-900"
