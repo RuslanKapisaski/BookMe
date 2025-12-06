@@ -31,6 +31,10 @@ export default function Home() {
 
       {/* LATEST PROPERTIES */}
       <Properties properties={latest} />
+      <section className="max-w-6xl mx-auto mt-16 px-4 pb-16">
+        <h2 className="text-3xl font-bold mb-6">Latest Properties</h2>
+        <Properties properties={latest} />
+      </section>
     </div>
   );
 }
