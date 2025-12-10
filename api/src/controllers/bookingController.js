@@ -23,6 +23,13 @@ bookingController.get("/me", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;
     const userBookings = await bookingService.getAllByUser(userId);
+
+    if (!userBookings || userBookings.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No bookings found for this user" });
+    }
+
     res.status(200).json({
       message: "User bookings",
       bookings: userBookings,
@@ -75,8 +82,9 @@ bookingController.get("/:bookingId/details", async (req, res) => {
 bookingController.post("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;
-    const bookingData = { ...req.body, user: userId };
-    const newBooking = await bookingService.create(bookingData, userId);
+    const bookingData = { ...req.body, guest: userId };
+    const newBooking = await bookingService.create(bookingData);
+
     res.status(201).json({
       message: "Successfully created booking",
       booking: newBooking,

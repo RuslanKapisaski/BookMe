@@ -20,7 +20,9 @@ export default {
   },
 
   getAllByUser(userId) {
-    return Booking.find({ guest: userId });
+    return Booking.find({ guest: userId })
+      .populate("guest")
+      .populate("property");
   },
 
   create(bookingData) {
