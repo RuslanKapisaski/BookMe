@@ -42,7 +42,7 @@ export default function Details() {
   console.log(property?.owner?.email);
 
   return property ? (
-    <section className="max-w-6xl mx-auto px-4 py-10">
+    <section className="max-w-4xl mx-auto px-4 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <img src={property.image} className="w-full rounded-xl shadow-lg" />
 
@@ -56,7 +56,7 @@ export default function Details() {
           <div className="flex items-start gap-8 mt-2">
             {user && (
               <button
-                className="mt-6 bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-800"
+                className="mt-1 bg-sky-700 text-white px-12 py-1 rounded-lg hover:bg-sky-800"
                 onClick={bookHandler}
               >
                 Book Now
