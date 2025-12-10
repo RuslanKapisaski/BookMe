@@ -19,9 +19,9 @@ bookingController.get("/latest", async (req, res) => {
   }
 });
 
-bookingController.get("/user/:userId", async (req, res) => {
+bookingController.get("/me", authMiddleware, async (req, res) => {
   try {
-    const userId = req.params.ownerId;
+    const userId = req.user._id;
     const userBookings = await bookingService.getAllByUser(userId);
     res.status(200).json({
       message: "User bookings",
