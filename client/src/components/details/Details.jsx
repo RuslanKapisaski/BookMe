@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 import useApi from "../../hooks/useApi";
 import { useUserContext } from "../../contexts/UserContext";
 import Booking from "../../booking/Booking";
 import { useState } from "react";
+import Review from "../review/Review";
 
 export default function Details() {
   const [showBooking, setShowBooking] = useState(false);
@@ -38,8 +39,6 @@ export default function Details() {
     setShowBooking(true);
   }
 
-  console.log(user?.email);
-  console.log(property?.owner?.email);
 
   return property ? (
     <section className="max-w-4xl mx-auto px-4 py-10">
@@ -55,12 +54,21 @@ export default function Details() {
           <p className="mt-5 text-gray-800">{property.description}</p>
           <div className="flex items-start gap-8 mt-2">
             {user && (
-              <button
-                className="mt-1 bg-sky-700 text-white px-12 py-1 rounded-lg hover:bg-sky-800"
-                onClick={bookHandler}
-              >
-                Book Now
-              </button>
+              <>
+                <button
+                  className="mt-1 bg-sky-700 text-white px-12 py-1 rounded-lg hover:bg-sky-800"
+                  onClick={bookHandler}
+                >
+                  Book Now
+                </button>
+                <Link
+                  to={`/properties/${propertyId}/review`}
+                  className="mt-1 bg-sky-700 text-white px-12 py-1 rounded-lg hover:bg-sky-800"
+                  onClick={bookHandler}
+                >
+                  Add Review
+                </Link>
+              </>
             )}
 
             {showBooking && (

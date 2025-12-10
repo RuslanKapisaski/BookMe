@@ -11,26 +11,12 @@ export default function Booking({ property }) {
   const [bill, setBill] = useState(0);
   const [guests, setGuests] = useState(1);
   const [errors, setErrors] = useState({});
-
   const { request } = useApi();
-  const { user } = useUserContext();
+
+
   const handleGuestsChange = (e) => {
     const value = parseInt(e.target.value, 10);
     setGuests(value);
-
-    if (value < 1) {
-      setErrors((prev) => ({ ...prev, guestsCount: "Minimum 1 guest" }));
-    } else if (value > property.capacity) {
-      setErrors((prev) => ({
-        ...prev,
-        guestsCount: `Maximum capacity is ${property.capacity}`,
-      }));
-    } else {
-      setErrors((prev) => {
-        const { guestsCount, ...rest } = prev;
-        return rest;
-      });
-    }
   };
 
   useEffect(() => {
@@ -57,7 +43,6 @@ export default function Booking({ property }) {
     }
 
     const booking = {
-      guest: user._id,
       property: property._id,
       dateFrom: startDate,
       dateTo: endDate,
@@ -66,7 +51,6 @@ export default function Booking({ property }) {
       guestsCount: guests,
       note: formData.note || "",
     };
-    console.log(booking);
 
     try {
       const result = await request("/api/bookings", "POST", booking);
@@ -83,7 +67,7 @@ export default function Booking({ property }) {
   });
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-row gap-1 w-lg ">
       <DatePicker
         selected={startDate}
         onChange={(dates) => {
@@ -102,7 +86,7 @@ export default function Booking({ property }) {
         inline
       />
 
-      <div className="p-1 border border-gray-500 rounded-sm">
+      <div className=" bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-800">
         {startDate && <p>Start Date: {startDate.toLocaleDateString()}</p>}
         {endDate && <p>End Date: {endDate.toLocaleDateString()}</p>}
         {period > 0 && (

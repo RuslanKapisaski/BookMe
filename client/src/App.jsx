@@ -8,6 +8,8 @@ import Home from "./components/home/Home";
 import AddProperty from "./components/add-property/AddProperty";
 import Catalog from "./components/catalog/Catalog";
 import Details from "./components/details/Details";
+import Profile from "./components/profile/Profile";
+import Review from "./components/review/Review";
 
 function App() {
   return (
@@ -15,12 +17,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/properties/add" element={<AddProperty />} />
         <Route path="/properties/:propertyId/details" element={<Details />} />
+        <Route path="/properties/:propertyId/review" element={<Review />} />
       </Routes>
       <Footer />
     </>

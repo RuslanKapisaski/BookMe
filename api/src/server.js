@@ -13,7 +13,7 @@ const port = 3030;
 // Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     credentials: true,
     allowedHeaders: ["Content-Type", "X-Authorization"],
     exposedHeaders: ["X-Authorization"],
