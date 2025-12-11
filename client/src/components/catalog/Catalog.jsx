@@ -18,8 +18,8 @@ export default function Catalog() {
   }, []);
 
   return (
-    <section className="max-w-full mx-auto px-6 py-12 bg-sky-800 rounded-lg shadow-xl">
-      <h2 className="text-3xl font-bold mb-6">Browse All Properties</h2>
+    <section className="max-w-full mx-auto px-6 py-12 bg-sky-800  ">
+      <h2 className="text-3xl font-bold mb-10 text-white">Browse All Properties</h2>
       <Properties properties={properties} />
     </section>
   );

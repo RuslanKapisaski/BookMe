@@ -2,7 +2,8 @@ import { Link } from "react-router";
 
 export default function Properties({ properties }) {
   return (
-    <div className="grid md:grid-cols-3 gap-6">
+    //  backdrop-blur-md border
+    <div className="flex gap-4  justify-center bg-white/10   rounded-xl shadow-lg p-4">
       {properties.length === 0 && (
         <p className="text-gray-300">No properties yet.</p>
       )}
@@ -15,11 +16,11 @@ export default function Properties({ properties }) {
           <img
             src={property.image}
             alt={property.name}
-            className="h-40 w-full object-cover rounded-lg mb-3"
+            className="h-40 w-300 object-cover rounded-lg mb-3"
           />
 
-          <h3 className="text-xl font-semibold">{property.name}</h3>
-          <p className="text-gray-300">{property.city}</p>
+          <h3 className="text-md font-semibold ">{property.name}</h3>
+          <p className="text-gray-500">{property.city}</p>
 
           <p className="text-lg font-bold mt-2">
             ${property.pricePerNight} / night

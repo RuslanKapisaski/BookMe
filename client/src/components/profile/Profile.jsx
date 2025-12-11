@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BookingsList from "../../bookings-list/BookingsList";
-
+import BookingsList from "../bookings-list/BookingsList";
 import { useUserContext } from "../../contexts/UserContext";
 import useApi from "../../hooks/useApi";
 

@@ -44,10 +44,7 @@ export default function AddProperty() {
     >
       <form
         action={formAction}
-        className="    min-w-100 m-20 
-    bg-white/10        /* Transparent white layer */
-    backdrop-blur-md   /* Blur behind the form */
-    shadow-xl rounded-xl p-6 ring-1 ring-white/20
+        className="min-w-100 m-20 bg-white/10 backdrop-blur-md  shadow-2xl rounded-xl p-4 ring-1 ring-white/10
 "
       >
         <h2 className="text-2xl font-bold text-center mb-4 text-white">

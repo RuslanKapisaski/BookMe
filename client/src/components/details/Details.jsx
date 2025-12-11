@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import useApi from "../../hooks/useApi";
 import { useUserContext } from "../../contexts/UserContext";
 import Booking from "../../booking/Booking";
+import Booking from "../booking/Booking";
 import { useState } from "react";
 import Review from "../review/Review";
 
