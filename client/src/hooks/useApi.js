@@ -14,7 +14,7 @@ export default function useApi(url, initialState) {
 
     request(url)
       .then((result) => setData(result))
-      .catch((err) => alert(err.message));
+      .catch((err) => setError(err.message));
   }, [url]);
 
   const request = async (url, method = "GET", data = null, config = {}) => {
