@@ -1,9 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useDebugValue,
+  useEffect,
+  useState,
+} from "react";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const sotredUser = localStorage.getItem("user");
+    return sotredUser ? JSON.parse(sotredUser) : null;
+  });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   async function registerHandler(values) {
     try {

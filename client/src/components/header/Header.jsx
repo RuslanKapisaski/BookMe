@@ -6,11 +6,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-sky-950 text-white shadow-md font-medium">
+      <header className="bg-sky-900 text-white shadow-md font-medium p-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0 text-2xl font-bold">BookMe</div>
-
             <nav className="hidden md:flex space-x-4">
               <Link to="/" className="hover:text-gray-200">
                 Home

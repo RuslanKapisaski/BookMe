@@ -3,9 +3,8 @@ import Search from "../search/Search";
 
 export default function Hero() {
   return (
-    <section className="relative bg-sky-950 pt-20 pb-32 text-white">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
-        {/* LEFT CONTENT */}
+    <section className="relative bg-sky-700 pt-10 pb-20 text-white">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
         <div className="flex-1">
           <span className="inline-block bg-sky-800/40 px-4 py-1 rounded-full text-sm mb-4">
             Premium Stays • BookMe
