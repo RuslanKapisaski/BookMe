@@ -14,7 +14,7 @@ export default {
   },
 
   getLatest() {
-    return Property.find().sort({ _id: -1 });
+    return Property.find().sort({ _id: -1 }).limit(3);
   },
 
   getAllByOwner(ownerId) {
