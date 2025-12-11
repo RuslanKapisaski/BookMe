@@ -76,7 +76,7 @@ reviewController.post("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.user._id;
     const reviewData = { ...req.body, user: userId };
-    const newReview = await reviewService.create(reviewData, userId);
+    const newReview = await reviewService.create(reviewData);
     res.status(201).json({
       message: "Successfully created review",
       review: newReview,
