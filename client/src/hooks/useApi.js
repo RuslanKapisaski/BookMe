@@ -7,6 +7,7 @@ const baseUrl = "http://localhost:3030";
 export default function useApi(url, initialState) {
   const { user, isAuthenticated } = useContext(UserContext);
   const [data, setData] = useState(initialState);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!url) return;
@@ -39,11 +40,12 @@ export default function useApi(url, initialState) {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
+      setError(result.message);
       throw new Error(result.message || "Request failed");
     }
 
     return extractData(result);
   };
 
-  return { request, data };
+  return { request, data, error };
 }
