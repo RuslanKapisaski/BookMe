@@ -35,12 +35,22 @@ export default function AddProperty() {
   });
 
   return (
-    <section className="flex justify-center mt-10">
+    <section
+      className="flex justify-center bg-cover bg-center bg-no-repeat
+    min-h-screen "
+      style={{
+        backgroundImage: "url('/images/add-property.webp')",
+      }}
+    >
       <form
         action={formAction}
-        className="w-full max-w-2xl bg-sky-900 shadow-xl rounded-xl p-8"
+        className="    min-w-100 m-20 
+    bg-white/10        /* Transparent white layer */
+    backdrop-blur-md   /* Blur behind the form */
+    shadow-xl rounded-xl p-6 ring-1 ring-white/20
+"
       >
-        <h2 className="text-3xl font-bold text-center mb-6 text-white">
+        <h2 className="text-2xl font-bold text-center mb-4 text-white">
           Add New Property
         </h2>
 
@@ -50,7 +60,7 @@ export default function AddProperty() {
           </p>
         )}
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">Property Name</span>
           <input
             name="name"
@@ -61,7 +71,7 @@ export default function AddProperty() {
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">City</span>
           <input
             name="city"
@@ -72,28 +82,28 @@ export default function AddProperty() {
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">Address</span>
           <input
             type="text"
-            className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
+            className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring "
             {...register("address")}
             required
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">Price per Night ($)</span>
           <input
             type="number"
-            className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
+            className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring  "
             required
             {...register("pricePerNight")}
             min="1"
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">Max Guests</span>
           <input
             type="number"
@@ -104,7 +114,7 @@ export default function AddProperty() {
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           <span className="text-white">Description</span>
           <textarea
             name="description"
@@ -115,7 +125,7 @@ export default function AddProperty() {
           />
         </label>
 
-        <label className="block mb-6">
+        <label className="block mb-2">
           <span className="text-white">Image URL</span>
           <input
             name="image"
@@ -128,7 +138,7 @@ export default function AddProperty() {
 
         <button
           type="submit"
-          className="w-full bg-sky-700 hover:bg-sky-800 text-white py-3 rounded-lg font-semibold text-lg"
+          className="w-full bg-sky-700/50 hover:bg-sky-800 text-white py-3 rounded-lg font-semibold text-lg"
         >
           Add Property
         </button>
