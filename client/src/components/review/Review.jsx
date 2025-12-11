@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
-import { useLocation, useParams } from "react-router";
+import { redirect, useLocation, useNavigate, useParams } from "react-router";
 
 export default function Review() {
   const { propertyId } = useParams();
@@ -11,6 +11,7 @@ export default function Review() {
 
   const location = useLocation();
   const bgImage = location.state?.image;
+  const { navigate } = useNavigate();
 
   const handleSubmit = async ({ comment, rating }) => {
     const ratingNumber = parseInt(rating, 10);
@@ -32,7 +33,8 @@ export default function Review() {
       });
 
       setSuccessMessage("Review submitted successfully!");
-      setError("");
+
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       setError("Failed to submit the review. Please try again.");
       console.error("Error submitting review: ", error);
