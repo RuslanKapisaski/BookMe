@@ -1,14 +1,10 @@
 import Review from "../models/Review.js";
 
 export default {
-  getById(reviewId) {
-    return Review.findById(reviewId).populate([
-      "property",
-      "user",
-      "rating",
-      "comment",
-      "createdAt",
-    ]);
+  getById(propertyId) {
+    return Review.find({ property: propertyId })
+      .populate(["property", "user"])
+      .sort({ createdAt: -1 });
   },
 
   getAll() {

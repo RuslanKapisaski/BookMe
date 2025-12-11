@@ -49,10 +49,10 @@ reviewController.get("/", async (req, res) => {
   }
 });
 
-reviewController.get("/:userId/details", async (req, res) => {
+reviewController.get("/:propertyId/details", async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const review = await reviewService.getById(userId);
+    const propertyId = req.params.propertyId;
+    const review = await reviewService.getById(propertyId);
 
     if (!review) {
       res.status(404).json({
