@@ -1,39 +1,37 @@
 import React, { useState } from "react";
 import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
+import { useLocation, useParams } from "react-router";
 
-export default function Review({ propertyId }) {
-  const [rating, setRating] = useState(1);
-  const [comment, setComment] = useState("");
+export default function Review() {
+  const { propertyId } = useParams();
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const { request } = useApi();
+  const { request, error: err } = useApi();
+
+  const location = useLocation();
+  const bgImage = location.state?.image;
 
   const handleSubmit = async ({ comment, rating }) => {
+    const ratingNumber = parseInt(rating, 10);
     if (!comment.trim()) {
       setError("Comment is required!");
       return;
     }
 
-    setComment(comment);
-
-    if (rating < 1 || rating > 5) {
+    if (ratingNumber < 1 || ratingNumber > 5) {
       setError("Rating should be between 1 and 5!");
       return;
     }
 
-    setRating(rating);
-
     try {
       const result = await request("/api/reviews", "POST", {
-        propertyId,
-        rating,
+        property: propertyId,
+        rating: ratingNumber,
         comment,
       });
 
       setSuccessMessage("Review submitted successfully!");
-      setComment("");
-      setRating(1);
       setError("");
     } catch (error) {
       setError("Failed to submit the review. Please try again.");
@@ -46,21 +44,29 @@ export default function Review({ propertyId }) {
     comment: "",
   });
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 bg-white shadow-lg rounded-md">
-      <h2 className="text-2xl font-semibold mb-4">Submit a Review</h2>
-      {error && <div className="text-red-500 mb-4">{error}</div>}
-      {successMessage && (
-        <div className="text-green-500 mb-4">{successMessage}</div>
-      )}
-
-      <form action={formAction}>
+    <div
+      className="min-h-screen flex items-center justify-center px-6 py-20 bg-cover bg-center bg-no-repeat relative"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+      }}
+    >
+      <form
+        className="text-gray min-w-[360px] m-20 bg-white/20 backdrop-blur-md shadow-2xl rounded-xl p-4 ring-2 ring-gray-500"
+        action={formAction}
+      >
+        <h2 className="text-2xl font-semibold mb-4">Submit a Review</h2>
+        {error ||
+          (err && <div className="text-red-500 mb-4">{error || err}</div>)}
+        {successMessage && (
+          <div className="text-green-500 mb-4">{successMessage}</div>
+        )}
         <div className="mb-4">
           <label htmlFor="rating" className="block text-lg mb-2">
             Rating (1 to 5)
           </label>
           <select
             id="rating"
-            onChange={(e) => setRating(Number(e.target.value))}
+            {...register("rating")}
             className="w-full p-3 border border-gray-300 rounded-md"
           >
             {[1, 2, 3, 4, 5].map((rate) => (
@@ -87,9 +93,9 @@ export default function Review({ propertyId }) {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
+            className="bg-blue-600/50 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
           >
-            Submit Review
+            Submit
           </button>
         </div>
       </form>

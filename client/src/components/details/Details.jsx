@@ -66,6 +66,7 @@ export default function Details() {
                   to={`/properties/${propertyId}/review`}
                   className="mt-1 bg-sky-700 text-white px-12 py-1 rounded-lg hover:bg-sky-800"
                   onClick={bookHandler}
+                  state={{ image: property.image }}
                 >
                   Add Review
                 </Link>
