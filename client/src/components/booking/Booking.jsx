@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import useForm from "../hooks/useForm";
-import useApi from "../hooks/useApi";
-import { useUserContext } from "../contexts/UserContext";
+import useForm from "../../hooks/useForm";
+import useApi from "../../hooks/useApi";
+import { useUserContext } from "../../contexts/UserContext";
 
 export default function Booking({ property }) {
   const [startDate, setStartDate] = useState(new Date());
