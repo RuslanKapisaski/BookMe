@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import useForm from "../../hooks/useForm";
 import useApi from "../../hooks/useApi";
-import { useUserContext } from "../../contexts/UserContext";
+import Toast from "../toast/Toast";
+import { useNavigate } from "react-router";
 
 export default function Booking({ property }) {
   const [startDate, setStartDate] = useState(new Date());
@@ -10,9 +11,9 @@ export default function Booking({ property }) {
   const [period, setPeriod] = useState(0);
   const [bill, setBill] = useState(0);
   const [guests, setGuests] = useState(1);
-  const [errors, setErrors] = useState({});
   const { request } = useApi();
-
+  const [toast, setToast] = useState(null);
+  const navigate = useNavigate();
 
   const handleGuestsChange = (e) => {
     const value = parseInt(e.target.value, 10);
@@ -54,11 +55,13 @@ export default function Booking({ property }) {
 
     try {
       const result = await request("/api/bookings", "POST", booking);
-      console.log("Booking successful:", result);
-      alert("Booking successful!");
+      setToast({ message: "Booking successful!", type: "success" });
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       console.error("Booking failed:", err);
-      alert(err.message || "Booking failed");
+      setToast({ message: err.message || "Booking failed", type: "error" });
     }
   };
 
@@ -67,7 +70,7 @@ export default function Booking({ property }) {
   });
 
   return (
-    <div className="flex flex-row gap-1 w-lg ">
+    <div className="flex flex-row gap-4 w-lg">
       <DatePicker
         selected={startDate}
         onChange={(dates) => {
@@ -86,7 +89,7 @@ export default function Booking({ property }) {
         inline
       />
 
-      <div className=" bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-800">
+      <div className=" glass backdrop-blur-md hover:bg-white/20 transition-colors  bg-white/10 border border-white/20 text-white px-6 py-3 rounded-lg">
         {startDate && <p>Start Date: {startDate.toLocaleDateString()}</p>}
         {endDate && <p>End Date: {endDate.toLocaleDateString()}</p>}
         {period > 0 && (
@@ -113,9 +116,6 @@ export default function Booking({ property }) {
                   onChange={handleGuestsChange}
                   className="mt-1 w-full px-1 py-1 border rounded-lg"
                 />
-                {errors.guestsCount && (
-                  <p className="text-red-600">{errors.guestsCount}</p>
-                )}
               </div>
 
               <div className="mt-3">
@@ -134,11 +134,16 @@ export default function Booking({ property }) {
                 className="w-full bg-sky-600 hover:bg-sky-700 text-white py-2 rounded-lg mt-3"
               />
             </form>
-
-            {error && <p className="text-red-600 mt-2">{error}</p>}
           </>
         )}
       </div>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }
