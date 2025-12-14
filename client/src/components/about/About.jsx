@@ -1,9 +1,9 @@
 export default function About() {
   return (
-    <section className="bg-sky-950 text-white min-h-screen py-16">
+    <section className="bg-sky-800 text-white min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-6 space-y-16">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="text-4xl md:text-6xl font-bold">
             About <span className="text-sky-400">BookMe</span>
           </h1>
           <p className="text-gray-300 max-w-2xl mx-auto">
@@ -42,8 +42,8 @@ export default function About() {
             Why Choose BookMe?
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-sky-900/60 rounded-xl p-6 text-center">
+          <div className="grid md:grid-cols-3 gap-8 ">
+            <div className="bg-sky-900/60 rounded-xl p-6 text-center transition-colors duration-500 hover:bg-sky-700/80">
               <h3 className="text-xl font-semibold mb-2">Unique Places</h3>
               <p className="text-gray-300">
                 From city apartments to seaside villas — discover stays you’ll
@@ -51,7 +51,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="bg-sky-900/60 rounded-xl p-6 text-center">
+            <div className="bg-sky-900/60 rounded-xl p-6 text-center transition-colors duration-500 hover:bg-sky-700/80">
               <h3 className="text-xl font-semibold mb-2">Real Guest Reviews</h3>
               <p className="text-gray-300">
                 Every opinion on BookMe comes from real guests who have
@@ -59,7 +59,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="bg-sky-900/60 rounded-xl p-6 text-center">
+            <div className="bg-sky-900/60 rounded-xl p-6 text-center transition-colors duration-500 hover:bg-sky-700/80">
               <h3 className="text-xl font-semibold mb-2">Fast Booking</h3>
               <p className="text-gray-300">
                 Book your stay in minutes with our smooth and intuitive
