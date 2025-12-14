@@ -19,10 +19,10 @@ propertyController.get("/latest", async (req, res) => {
   }
 });
 
-propertyController.get("/owner/:ownerId", async (req, res) => {
+propertyController.get("/owner", authMiddleware, async (req, res) => {
   try {
-    const params = req.params.ownerId;
-    const ownerProperties = await propertyService.getAllByOwner(params);
+    const userId = req.user._id;
+    const ownerProperties = await propertyService.getAllByOwner(userId);
     res.status(200).json({
       message: "Owner Properties",
       properties: ownerProperties,

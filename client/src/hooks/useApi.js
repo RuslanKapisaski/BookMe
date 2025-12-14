@@ -8,6 +8,7 @@ export default function useApi(url, initialState) {
   const { user, isAuthenticated } = useContext(UserContext);
   const [data, setData] = useState(initialState);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!url) return;
@@ -34,18 +35,23 @@ export default function useApi(url, initialState) {
         "X-Authorization": config.accessToken || user.accessToken,
       };
     }
+    try {
+      setLoading(true);
+      
+      const response = await fetch(`${baseUrl}${url}`, options);
+      const result = await response.json();
 
-    const response = await fetch(`${baseUrl}${url}`, options);
+      if (!response.ok) {
+        setError(result.message);
+      }
 
-    const result = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      setError(result.message);
-      throw new Error(result.message || "Request failed");
+      return extractData(result);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
-
-    return extractData(result);
   };
 
-  return { request, data, error };
+  return { request, data, error, loading };
 }

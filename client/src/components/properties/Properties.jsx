@@ -2,7 +2,6 @@ import { Link } from "react-router";
 
 export default function Properties({ properties }) {
   return (
-    //  backdrop-blur-md border
     <div className="flex gap-4  justify-center bg-white/10   rounded-xl shadow-lg p-4">
       {properties.length === 0 && (
         <p className="text-gray-300">No properties yet.</p>
