@@ -6,13 +6,13 @@ import Login from "./components/login/Login";
 import Logout from "./components/logout/Logout";
 import Home from "./components/home/Home";
 import AddProperty from "./components/add-property/AddProperty";
+import EditProperty from "./components/edit-property/EditProperty";
 import Catalog from "./components/catalog/Catalog";
 import Details from "./components/details/Details";
 import Profile from "./components/profile/Profile";
 import Review from "./components/review/Review";
 import About from "./components/about/About";
 import NotFound from "./components/not-found/NotFound";
-
 function App() {
   return (
     <>
@@ -26,6 +26,7 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/about" element={<About />} />
         <Route path="/properties/add" element={<AddProperty />} />
+        <Route path="/properties/:propertyId/edit" element={<EditProperty />} />
         <Route path="/properties/:propertyId/details" element={<Details />} />
         <Route path="/properties/:propertyId/review" element={<Review />} />
         <Route path="/*" element={<NotFound />} />
