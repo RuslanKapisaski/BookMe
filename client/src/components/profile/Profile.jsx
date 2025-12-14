@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookingsList from "../bookings-list/BookingsList";
 import useApi from "../../hooks/useApi";
 import { useUserContext } from "../../contexts/UserContext";
 import NotFound from "../not-found/NotFound";
+import Properties from "../properties/Properties";
+
 export default function Profile() {
   const { user } = useUserContext();
+  const { request, loading, error } = useApi();
+  const [bookings, setBookings] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   if (!user) {
     return (
@@ -16,28 +21,32 @@ export default function Profile() {
     );
   }
 
-  const { request } = useApi();
-  const [bookings, setBookings] = useState([]);
-
-  const [error, setError] = useState(null);
-
   useEffect(() => {
-    const fetchUserBookings = async () => {
-      try {
-        const bookings = await request(`/api/bookings/me`, "GET", null, {
+    const fetchUserData = async () => {
+      const [bookings, properties] = await Promise.all([
+        request(`/api/bookings/me`, "GET", null, {
           accessToken: user.accessToken,
-        });
+        }),
+        request(`/api/properties/owner`),
+      ]);
 
-        setBookings(bookings);
-      } catch (error) {}
-      setError("Failed to fetch bookings");
-      console.error("Failed to fetch bookings:", error);
+      setBookings(bookings);
+      setProperties(properties);
     };
-    fetchUserBookings();
+
+    fetchUserData();
   }, [user]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-6">
+    <div className="max-w-7xl mx-auto p-4 space-y-6">
       <div className="bg-white border rounded-lg p-6 shadow-sm">
         <div className="flex items-center space-x-4">
           <div className="w-16 h-16 bg-sky-200 rounded-full flex items-center justify-center text-2xl font-bold text-white">
@@ -53,11 +62,20 @@ export default function Profile() {
         </div>
       </div>
 
-      <div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-3">
-          Your Bookings
-        </h3>
-        <BookingsList bookings={bookings} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section>
+          <h3 className="text-xl font-semibold text-gray-700 mb-3">
+            Your Properties
+          </h3>
+          <Properties properties={properties} />
+        </section>
+
+        <section>
+          <h3 className="text-xl font-semibold text-gray-700 mb-3">
+            Your Bookings
+          </h3>
+          <BookingsList bookings={bookings} />
+        </section>
       </div>
     </div>
   );

@@ -32,6 +32,7 @@ export default function useForm(callback, initialState) {
 
   return {
     values,
+    setValues,
     error,
     formAction,
     register,
