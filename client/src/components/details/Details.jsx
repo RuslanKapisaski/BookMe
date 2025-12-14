@@ -6,7 +6,6 @@ import { useUserContext } from "../../contexts/UserContext";
 import Booking from "../booking/Booking";
 import Toast from "../toast/Toast";
 import ReviewList from "../review-list/ReviewList";
-import { extractData } from "../../utils/extractData";
 
 export default function Details() {
   const [showBooking, setShowBooking] = useState(false);
@@ -82,17 +81,36 @@ export default function Details() {
               <div className="flex flex-wrap gap-4 mt-6">
                 <button
                   onClick={bookHandler}
-                  className="bg-sky-700 text-white px-12 py-2 rounded-lg hover:bg-sky-800 transition"
+                  className="mt-6 bg-sky-700 text-white px-6 py-3 rounded-lg hover:bg-sky-900 transition"
                 >
                   Book Now
                 </button>
-                <Link
-                  to={`/properties/${propertyId}/review`}
-                  state={{ image: property.image }}
-                  className="bg-sky-700 text-white px-12 py-2 rounded-lg hover:bg-sky-800 transition"
-                >
-                  Add Review
-                </Link>
+
+                {user?.email === property?.owner?.email ? (
+                  <>
+                    <Link
+                      to={`/properties/${propertyId}/edit`}
+                      className="mt-6 bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition"
+                    >
+                      Edit
+                    </Link>
+
+                    <button
+                      onClick={deleteHandler}
+                      className="mt-6 bg-red-700 text-white px-6 py-3 rounded-lg hover:bg-red-900 transition"
+                    >
+                      Delete
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to={`/properties/${propertyId}/review`}
+                    state={{ image: property.image }}
+                    className="bg-sky-700 text-white px-12 py-2 rounded-lg hover:bg-sky-800 transition"
+                  >
+                    Add Review
+                  </Link>
+                )}
               </div>
             )}
 
@@ -111,15 +129,6 @@ export default function Details() {
                   <Booking property={property} />
                 </div>
               </div>
-            )}
-
-            {user?.email === property?.owner?.email && (
-              <button
-                onClick={deleteHandler}
-                className="mt-6 bg-red-700 text-white px-6 py-3 rounded-lg hover:bg-red-900 transition"
-              >
-                Delete
-              </button>
             )}
           </div>
         </div>
