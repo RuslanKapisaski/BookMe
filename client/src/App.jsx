@@ -10,6 +10,7 @@ import Catalog from "./components/catalog/Catalog";
 import Details from "./components/details/Details";
 import Profile from "./components/profile/Profile";
 import Review from "./components/review/Review";
+import About from "./components/about/About";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/about" element={<About />} />
         <Route path="/properties/add" element={<AddProperty />} />
         <Route path="/properties/:propertyId/details" element={<Details />} />
         <Route path="/properties/:propertyId/review" element={<Review />} />
