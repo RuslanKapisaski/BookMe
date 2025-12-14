@@ -1,18 +1,12 @@
 import { useState } from "react";
 
 export default function BookingsList({ bookings }) {
-  const { isDeleted, setIsDeleted } = useState(true);
-
   if (!bookings || bookings.length === 0) {
     return <p className="text-gray-500">No bookings yet.</p>;
   }
 
-  const deleteHandler = (bookingId) => {
-    return 1;
-  };
-
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {bookings.map((booking) => (
         <div
           key={booking._id}
@@ -28,7 +22,14 @@ export default function BookingsList({ bookings }) {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-gray-700">
+          <div className="grid grid-cols-3 gap-2 text-gray-700">
+            <div>
+              <img
+                className="w-md h-md  ring-2 ring-sky-900"
+                src={booking.property.image}
+                alt="Property image"
+              />
+            </div>
             <div>
               <p className="font-medium">Property:</p>
               <p>{booking.property?.name || "Unknown"}</p>
@@ -65,17 +66,6 @@ export default function BookingsList({ bookings }) {
               </div>
             )}
           </div>
-
-          <button
-            onClick={() => deleteHandler(booking._id)}
-            className={`px-4 py-2 rounded-lg font-semibold text-white ${
-              isDeleted
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-red-500 hover:bg-red-600"
-            }`}
-          >
-            {isDeleted ? "Deleted" : "Delete"}
-          </button>
         </div>
       ))}
     </div>
