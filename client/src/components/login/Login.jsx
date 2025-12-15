@@ -28,17 +28,27 @@ export default function Login() {
 
   {
     return (
-      <section className="flex justify-center mt-10">
+      <section
+        className="flex justify-center p-10 bg-sky-800"
+        style={{
+          backgroundImage: `url('/images/auth-img.jpg')`,
+        }}
+      >
         <form
           action={formAction}
-          className="w-full max-w-sm bg-sky-900 shadow-xl rounded-lg p-8"
+          className="text-black/80 min-w-[300px] m-20 bg-white/20 backdrop-blur-xs shadow-2xl rounded-xs p-5 ring-1 ring-gray-500"
         >
-          <h2 className="text-2xl font-bold text-center mb-6 text-white">
-            Login
-          </h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-          <label className="block mb-4">
-            <span className="text-white">Email</span>
+          {/* Error message */}
+          {error && (
+            <p className="text-red-500 font-medium text-sm mb-3 text-center">
+              {error}
+            </p>
+          )}
+
+          <label className="block mb-6">
+            <span>Email</span>
             <input
               type="email"
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
@@ -49,10 +59,10 @@ export default function Login() {
           </label>
 
           <label className="block mb-6">
-            <span className="text-white">Password</span>
+            <span>Password</span>
             <input
               type="password"
-              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
+              className="mt-2 w-full px-4 py-2  border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
               {...register("password")}
               required
@@ -66,16 +76,9 @@ export default function Login() {
             Login
           </button>
 
-          {/* Error message */}
-          {error && (
-            <p className="text-red-500 font-medium text-sm mb-3 text-center">
-              {error}
-            </p>
-          )}
-
-          <p className="text-center text-sm text-gray-200 mt-4">
+          <p className="text-center text-sm text-gray-700 mt-4">
             Don't have an account?{" "}
-            <Link to="/register" className="text-blue-400 hover:underline">
+            <Link to="/register" className="text-blue-400  hover:underline">
               Register here
             </Link>
           </p>

@@ -36,12 +36,17 @@ export default function Register() {
   });
 
   return (
-    <section className="flex justify-center mt-10">
+    <section
+      className="flex justify-center p-6"
+      style={{
+        backgroundImage: `url('/images/auth-img.jpg')`,
+      }}
+    >
       <form
         action={formAction}
-        className="w-full max-w-sm max-h-200 bg-sky-900 shadow-xl rounded-lg p-8"
+        className="text-black/80 min-w-[300px] m-20 bg-white/20 backdrop-blur-xs shadow-6xl rounded-xs p-6 ring-1 ring-gray-500"
       >
-        <h2 className="text-2xl font-bold text-center mb-6 text-white">
+        <h2 className="text-2xl font-bold text-center mb-6">
           Create an Account
         </h2>
 
@@ -52,7 +57,7 @@ export default function Register() {
         )}
 
         <label className="block mb-3">
-          <span className="text-white">Username</span>
+          <span>Username</span>
           <input
             type="text"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
@@ -63,7 +68,7 @@ export default function Register() {
         </label>
 
         <label className="block mb-3">
-          <span className="text-white">Email</span>
+          <span>Email</span>
           <input
             type="email"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
@@ -74,7 +79,7 @@ export default function Register() {
         </label>
 
         <label className="block mb-3">
-          <span className="text-white">Password</span>
+          <span>Password</span>
           <input
             type="password"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
@@ -85,7 +90,7 @@ export default function Register() {
         </label>
 
         <label className="block mb-5">
-          <span className="text-white">Repeat Password</span>
+          <span>Repeat Password</span>
           <input
             type="password"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
@@ -102,9 +107,9 @@ export default function Register() {
           Register
         </button>
 
-        <p className="text-center text-sm text-gray-200 mt-4">
+        <p className="text-center text-sm text-gray-700 mt-4">
           Already have an account?
-          <Link to="/login" className="text-blue-400 hover:underline">
+          <Link to="/login" className="text-blue-800 hover:underline">
             Login here
           </Link>
         </p>
