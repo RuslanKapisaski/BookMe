@@ -36,7 +36,7 @@ propertyController.get("/owner", authMiddleware, async (req, res) => {
 });
 
 propertyController.get("/", async (req, res) => {
-  const { city, guests } = req.query;
+  const { city, guests, page = 1, limit = 6 } = req.query;
 
   const filter = {};
 
@@ -49,11 +49,20 @@ propertyController.get("/", async (req, res) => {
   }
 
   try {
-    const properties = await propertyService.getAll(filter);
+    const { properties, total } = await propertyService.getAll(filter, {
+      page: Number(page),
+      limit: Number(limit),
+    });
 
     res.status(200).json({
       message: "Properties catalog",
       properties,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / limit),
+      },
     });
   } catch (error) {
     const errorMessage = getErrorMessage(error);

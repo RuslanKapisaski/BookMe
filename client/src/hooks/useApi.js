@@ -37,17 +37,18 @@ export default function useApi(url, initialState) {
     }
     try {
       setLoading(true);
-      
       const response = await fetch(`${baseUrl}${url}`, options);
       const result = await response.json();
 
       if (!response.ok) {
-        setError(result.message);
+        const message = result.message || result.error || "Request failed";
+        throw new Error(message);
       }
 
       return extractData(result);
     } catch (error) {
       setError(error.message);
+      throw error;
     } finally {
       setLoading(false);
     }
