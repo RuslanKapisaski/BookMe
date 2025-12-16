@@ -1,50 +1,60 @@
 import React, { useState } from "react";
+import { redirect, useLocation, useNavigate, useParams } from "react-router";
+
 import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
-import { redirect, useLocation, useNavigate, useParams } from "react-router";
+import { useUserContext } from "../../contexts/UserContext";
+import NotFound from "../not-found/NotFound";
 
 export default function Review() {
   const { propertyId } = useParams();
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const { request, error: err } = useApi();
+  const { request, error: requestErr } = useApi();
+  const { user } = useUserContext();
+  const navigate = useNavigate();
 
   const location = useLocation();
   const bgImage = location.state?.image;
-  const { navigate } = useNavigate();
+
+  if (!user) {
+    return (
+      <NotFound
+        message={"You do not have access to this content. Please login."}
+      />
+    );
+  }
 
   const handleSubmit = async ({ comment, rating }) => {
     const ratingNumber = parseInt(rating, 10);
-    if (!comment.trim()) {
+
+    if (!comment) {
       setError("Comment is required!");
       return;
     }
-
     if (ratingNumber < 1 || ratingNumber > 5) {
       setError("Rating should be between 1 and 5!");
       return;
     }
 
     try {
-      const result = await request("/api/reviews", "POST", {
+      await request("/api/reviews", "POST", {
         property: propertyId,
         rating: ratingNumber,
         comment,
       });
 
       setSuccessMessage("Review submitted successfully!");
-
+      setError("");
       setTimeout(() => navigate("/"), 2000);
-    } catch (error) {
-      setError("Failed to submit the review. Please try again.");
-      console.error("Error submitting review: ", error);
-    }
+    } catch (error) {}
   };
 
   const { register, formAction } = useForm(handleSubmit, {
     rating: 1,
     comment: "",
   });
+
   return (
     <div
       className="min-h-screen flex items-center justify-center px-6 py-20 bg-cover bg-center bg-no-repeat relative"
@@ -57,11 +67,15 @@ export default function Review() {
         action={formAction}
       >
         <h2 className="text-2xl font-semibold mb-4">Submit a Review</h2>
-        {error ||
-          (err && <div className="text-red-500 mb-4">{error || err}</div>)}
+
+        {(error || requestErr) && (
+          <div className="text-red-500 mb-4">{error || requestErr}</div>
+        )}
+
         {successMessage && (
           <div className="text-green-500 mb-4">{successMessage}</div>
         )}
+
         <div className="mb-4">
           <label htmlFor="rating" className="block text-lg mb-2">
             Rating (1 to 5)

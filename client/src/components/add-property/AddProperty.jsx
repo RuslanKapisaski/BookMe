@@ -2,10 +2,21 @@ import { useNavigate } from "react-router";
 
 import useForm from "../../hooks/useForm";
 import useApi from "../../hooks/useApi";
+import { useUserContext } from "../../contexts/UserContext";
+import NotFound from "../not-found/NotFound";
 
 export default function AddProperty() {
   const navigate = useNavigate();
   const { request, error: reqError } = useApi();
+  const { user } = useUserContext();
+
+  if (!user) {
+    return (
+      <NotFound
+        message={"You do not have access to this content. Please login."}
+      />
+    );
+  }
 
   const submitHandler = async (formData) => {
     const emptyField = Object.entries(formData).find(

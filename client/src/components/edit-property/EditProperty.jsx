@@ -2,11 +2,22 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
+import { useUserContext } from "../../contexts/UserContext";
+import NotFound from "../not-found/NotFound";
 
 export default function EditProperty() {
   const { propertyId } = useParams();
-  const navigate = useNavigate();
   const { request, loading } = useApi();
+  const navigate = useNavigate();
+  const { user } = useUserContext();
+
+  if (!user) {
+    return (
+      <NotFound
+        message={"You do not have access to this content. Please login."}
+      />
+    );
+  }
 
   const submitHandler = async (values) => {
     const emptyField = Object.values(values).some((v) => !v);
