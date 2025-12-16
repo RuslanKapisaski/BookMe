@@ -1,27 +1,25 @@
-import { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 
 import useForm from "../../hooks/useForm";
 import useApi from "../../hooks/useApi";
-import { useUserContext } from "../../contexts/UserContext";
-import { useNavigate } from "react-router";
 
 export default function AddProperty() {
   const navigate = useNavigate();
-  const { request } = useApi(null);
+  const { request, error: reqError } = useApi();
 
   const submitHandler = async (formData) => {
-    const emptyField = Object.entries(formData).find(([key, value]) => !value);
+    const emptyField = Object.entries(formData).find(
+      ([_, value]) => value === "" || value === null || value === undefined
+    );
 
     if (emptyField) {
-      throw new Error(`Field${emptyField[0]} is required!`);
+      throw new Error(`Field ${emptyField[0]} is required!`);
     }
 
     try {
-      const result = await request("/api/properties", "POST", formData);
+      await request("/api/properties", "POST", formData);
       navigate("/");
-    } catch (err) {
-      throw err;
-    }
+    } catch (err) {}
   };
 
   const { formAction, register, error } = useForm(submitHandler, {
@@ -51,9 +49,9 @@ export default function AddProperty() {
           Add New Property
         </h2>
 
-        {error && (
+        {(error || reqError) && (
           <p className="text-red-400 bg-red-900/20 border border-red-600 rounded p-2 mb-4 text-center">
-            {error}
+            {error || reqError}
           </p>
         )}
 
@@ -64,7 +62,6 @@ export default function AddProperty() {
             type="text"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
             {...register("name")}
-            required
           />
         </label>
 
@@ -75,7 +72,6 @@ export default function AddProperty() {
             type="text"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
             {...register("city")}
-            required
           />
         </label>
 
@@ -85,7 +81,6 @@ export default function AddProperty() {
             type="text"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring "
             {...register("address")}
-            required
           />
         </label>
 
@@ -94,7 +89,6 @@ export default function AddProperty() {
           <input
             type="number"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring  "
-            required
             {...register("pricePerNight")}
             min="1"
           />
@@ -105,7 +99,6 @@ export default function AddProperty() {
           <input
             type="number"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
-            required
             {...register("maxGuests")}
             min="1"
           />
@@ -118,7 +111,6 @@ export default function AddProperty() {
             rows="4"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
             {...register("description")}
-            required
           />
         </label>
 
@@ -129,7 +121,6 @@ export default function AddProperty() {
             type="url"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring focus:ring-sky-300"
             {...register("image")}
-            required
           />
         </label>
 

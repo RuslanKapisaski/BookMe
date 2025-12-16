@@ -6,7 +6,7 @@ const propertySchema = new Schema(
       type: String,
       required: [true, "Property name is required!"],
       minLength: [3, "Property name should be at least 3 characters long!"],
-      maxLength: [20, "Property name should be below 20 characters long!"],
+      maxLength: [30, "Property name should be below 20 characters long!"],
     },
     city: {
       type: String,
@@ -36,7 +36,6 @@ const propertySchema = new Schema(
       minLength: [10, "Enter a valid description!"],
     },
     image: {
-      // TODO: make it work with firebase
       type: String,
       required: [true, "Property image is required!"],
       match: [/^https?\:\/\/.+$/],
