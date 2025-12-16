@@ -51,7 +51,6 @@ export default function Hero() {
           <Search />
         </div>
 
-        {/* RIGHT IMAGE */}
         <div className="flex-1">
           <img
             src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop"
