@@ -23,7 +23,6 @@ export default function Hero() {
             apartments. Book easily, quickly and securely through BookMe.
           </p>
 
-          {/* HAPPY USERS */}
           <div className="flex items-center gap-4 mb-12">
             <div className="flex -space-x-3">
               <img
@@ -49,7 +48,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* SEARCH BAR */}
           <Search />
         </div>
 

@@ -9,8 +9,8 @@ export default {
     ]);
   },
 
-  getAll() {
-    return Property.find();
+  getAll(filter) {
+    return Property.find(filter);
   },
 
   getLatest() {

@@ -1,30 +1,46 @@
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
-import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
-import Toast from "../toast/Toast";
 
 export default function Search() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-  const handleSearch = async (search) => {
-    if (!search) return;
-    console.log(search);
+  const [city, setCity] = useState("");
+  const [guests, setGuests] = useState("");
 
-    const result = await useApi("");
+  const handleSearch = async ({ city, guests }) => {
+    const params = new URLSearchParams();
+
+    if (city?.trim()) {
+      params.append("city", city);
+    }
+    if (guests) {
+      params.append("guests", guests);
+    }
+
+    navigate(`/catalog?${params.toString()}`);
   };
 
   const { register, formAction } = useForm(handleSearch, {
-    search: " ",
+    city: "",
+    guests: "",
   });
   return (
     <form action={formAction} className="relative flex items-center">
       <div className="bg-white shadow-xl rounded-full flex items-center overflow-hidden max-w-xl">
         <input
           type="text"
-          placeholder="Search destination or property..."
-          className="flex-1 px-6 py-4 text-gray-700 outline-none"
+          placeholder="Where are you going?"
+          className="flex-1 px-4 py-3 rounded-lg  focus:ring focus:ring-sky-300 text-black"
+          {...register("city")}
+        />
+
+        <input
+          type="number"
+          placeholder="Guests"
+          className="w-full md:w-32 px-4 py-3 rounded-lg focus:ring focus:ring-sky-300  text-black"
+          {...register("guests")}
         />
 
         <button className="bg-sky-700 hover:bg-sky-800 text-white px-8 py-4 font-medium">

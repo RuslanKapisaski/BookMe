@@ -36,8 +36,20 @@ propertyController.get("/owner", authMiddleware, async (req, res) => {
 });
 
 propertyController.get("/", async (req, res) => {
+  const { city, guests } = req.query;
+
+  const filter = {};
+
+  if (city) {
+    filter.city = new RegExp(city, "i");
+  }
+
+  if (guests) {
+    filter.maxGuests = { $gte: Number(guests) };
+  }
+
   try {
-    const properties = await propertyService.getAll();
+    const properties = await propertyService.getAll(filter);
 
     res.status(200).json({
       message: "Properties catalog",
