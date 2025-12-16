@@ -9,8 +9,18 @@ export default {
     ]);
   },
 
-  getAll(filter) {
-    return Property.find(filter);
+  async getAll(filter, { page = 1, limit = 6 }) {
+    const skip = (page - 1) * limit;
+
+    const [properties, total] = await Promise.all([
+      Property.find(filter).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      Property.countDocuments(filter),
+    ]);
+
+    return {
+      properties,
+      total,
+    };
   },
 
   getLatest() {

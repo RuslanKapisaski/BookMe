@@ -3,11 +3,14 @@ import { useSearchParams } from "react-router";
 
 import useApi from "../../hooks/useApi";
 import Properties from "../properties/Properties";
+import Pagination from "../common/Pagination";
 
 export default function Catalog() {
   const { request, error } = useApi();
   const [properties, setProperties] = useState([]);
   const [searchParams] = useSearchParams();
+  const [pagination, setPagination] = useState(null);
+  const [page, setPage] = useState(1);
 
   const city = searchParams.get("city");
   const guests = searchParams.get("guests");
@@ -23,16 +26,25 @@ export default function Catalog() {
         query.append("guests", guests);
       }
 
+      query.append("page", page);
+      query.append("limit", 6);
+
       const queryString = query.toString();
+
       const url = queryString
-        ? `/api/properties?${queryString}`
-        : `/api/properties?`;
+        ? `/api/properties/?${queryString}`
+        : `/api/properties/?`;
 
       const result = await request(url);
 
-      setProperties(result);
+      setProperties(result.properties);
+      setPagination(result.pagination);
     };
     fetchData();
+  }, [city, guests, page]);
+
+  useEffect(() => {
+    setPage(1);
   }, [city, guests]);
 
   return (
@@ -65,6 +77,12 @@ export default function Catalog() {
 
         <Properties properties={properties} />
       </div>
+
+      <Pagination
+        page={page}
+        pages={pagination?.pages}
+        onPageChange={setPage}
+      />
     </section>
   );
 }
