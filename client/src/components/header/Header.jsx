@@ -11,15 +11,20 @@ export default function Header() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0 text-2xl font-bold">BookMe</div>
             <nav className="hidden md:flex space-x-4">
-              <Link to="/" className="hover:text-gray-200">
-                Home
-              </Link>
+              <div>
+                <Link to="/" className="hover:text-gray-200 p-2">
+                  Home
+                </Link>
+                <Link to="/catalog" className="hover:text-gray-200 p-2">
+                  Catalog
+                </Link>
+                <Link to="/about" className="hover:text-gray-200">
+                  About
+                </Link>
+              </div>
               {isAuthenticated ? (
                 <div>
-                  <Link
-                    to="/properties/add"
-                    className="hover:text-gray-200 p-2"
-                  >
+                  <Link to="/properties/add" className="hover:text-gray-200">
                     Add property
                   </Link>
 
@@ -33,11 +38,7 @@ export default function Header() {
                 </div>
               ) : (
                 <div>
-                  <Link to="/about" className="hover:text-gray-200 p-2">
-                    About
-                  </Link>
-
-                  <Link to="/register" className="hover:text-gray-200 p-2">
+                  <Link to="/register" className="hover:text-gray-200">
                     Register
                   </Link>
 
