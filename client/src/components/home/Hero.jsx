@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Search from "../search/Search";
 
 export default function Hero() {

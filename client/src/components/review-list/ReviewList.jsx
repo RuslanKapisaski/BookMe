@@ -1,7 +1,8 @@
 import { formatMyDate } from "../../utils/formatMyDate";
+
 export default function ReviewList({ reviews }) {
   return (
-    <div className="space-y-2 max-h-full overflow-y-auto scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-transparent">
+    <section className="space-y-2 max-h-full overflow-y-auto scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-transparent">
       {reviews && reviews.length > 0 ? (
         <div className="max-h-80 ">
           {reviews.map((review, idx) => (
@@ -25,7 +26,7 @@ export default function ReviewList({ reviews }) {
 
                 <p className="m-2 text-lg text-black/90">{review.comment}</p>
 
-                <span className="absolute bottom-4 right-6 text-xs text-gray-400">
+                <span className="absolute bottom-4 right-6 pl-4 text-xs text-gray-300">
                   {`Published on: ${formatMyDate(review.createdAt)}`}
                 </span>
               </div>
@@ -35,6 +36,6 @@ export default function ReviewList({ reviews }) {
       ) : (
         <p className="text-center text-gray-400">No reviews yet.</p>
       )}
-    </div>
+    </section>
   );
 }

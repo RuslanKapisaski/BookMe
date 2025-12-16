@@ -56,7 +56,7 @@ export default function Review() {
   });
 
   return (
-    <div
+    <section
       className="min-h-screen flex items-center justify-center px-6 py-20 bg-cover bg-center bg-no-repeat relative"
       style={{
         backgroundImage: `url(${bgImage})`,
@@ -115,6 +115,6 @@ export default function Review() {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }

@@ -28,18 +28,18 @@ export default function Search() {
   });
   return (
     <form action={formAction} className="relative flex items-center">
-      <div className="bg-white shadow-xl rounded-full flex items-center overflow-hidden max-w-xl">
+      <div className="bg-white shadow-xl rounded-xl flex items-center overflow-hidden max-w-xl">
         <input
           type="text"
           placeholder="Where are you going?"
-          className="flex-1 px-4 py-3 rounded-lg  focus:ring focus:ring-sky-300 text-black"
+          className="flex-1 px-4 p-2 m-1 rounded-lg  focus:ring focus:ring-sky-300 text-black"
           {...register("city")}
         />
 
         <input
           type="number"
           placeholder="Guests"
-          className="w-full md:w-32 px-4 py-3 rounded-lg focus:ring focus:ring-sky-300  text-black"
+          className="w-full md:w-32 px-4 p-2  m-1 rounded-lg focus:ring focus:ring-sky-300  text-black"
           {...register("guests")}
         />
 

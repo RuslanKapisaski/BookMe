@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+
 import useApi from "../../hooks/useApi";
 import useForm from "../../hooks/useForm";
 import { useUserContext } from "../../contexts/UserContext";
@@ -69,10 +70,15 @@ export default function EditProperty() {
   }
 
   return (
-    <section className="flex justify-center mt-10">
+    <section
+      className="flex justify-center p-10"
+      style={{
+        backgroundImage: "url('/images/property.webp')",
+      }}
+    >
       <form
         action={formAction}
-        className="w-full max-w-2xl bg-sky-900 shadow-xl rounded-xl p-8"
+        className="min-w-xl bg-white/10 backdrop-blur-xl  shadow-2xl rounded-xl p-4 ring-1 ring-white/10"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-white">
           Edit Property

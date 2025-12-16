@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router";
+
 import useForm from "../../hooks/useForm";
 import useApi from "../../hooks/useApi";
 import Toast from "../toast/Toast";
-import { useNavigate } from "react-router";
 
 export default function Booking({ property }) {
   const [startDate, setStartDate] = useState(new Date());
@@ -70,7 +71,7 @@ export default function Booking({ property }) {
   });
 
   return (
-    <div className="flex flex-row gap-4 w-lg">
+    <section className="flex flex-row gap-4 w-lg">
       <DatePicker
         selected={startDate}
         onChange={(dates) => {
@@ -144,6 +145,6 @@ export default function Booking({ property }) {
           onClose={() => setToast(null)}
         />
       )}
-    </div>
+    </section>
   );
 }

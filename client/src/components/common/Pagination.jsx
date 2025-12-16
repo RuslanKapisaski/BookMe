@@ -13,7 +13,7 @@ export default function Pagination({ page, pages, onPageChange }) {
         Prev
       </button>
 
-      {Array.from({ length: pages }, (_, i) => i + 1).map((p) => {
+      {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
         <button
           key={p}
           onClick={() => onPageChange(p)}
@@ -24,8 +24,8 @@ export default function Pagination({ page, pages, onPageChange }) {
           }`}
         >
           {p}
-        </button>;
-      })}
+        </button>
+      ))}
 
       <button
         disabled={page === pages}

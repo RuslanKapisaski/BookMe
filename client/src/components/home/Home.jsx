@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import Hero from "./Hero";
 import PopularDestinations from "./PopularDestinations";
 import useApi from "../../hooks/useApi";
@@ -21,10 +22,9 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <section>
       <div className="relative min-h-screen text-white bg-gradient-to-br from-sky-900 via-sky-800 to-sky-950">
         <Hero />
-
         <PopularDestinations />
 
         <section className="max-w-6xl mx-auto mt-16 px-4 pb-16">
@@ -32,6 +32,6 @@ export default function Home() {
           <Properties properties={latest} />
         </section>
       </div>
-    </>
+    </section>
   );
 }

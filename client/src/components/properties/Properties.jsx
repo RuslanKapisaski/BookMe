@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 
-export default function Properties({ properties }) {
+export default function Properties({ properties = [] }) {
   return (
-    <div className="flex gap-4  justify-center bg-white/10   rounded-xl shadow-lg p-4">
+    <section className="flex gap-2 justify-center bg-white/4 text-white/90 shadow-xl rounded-xs shadow-lg p-4">
       {properties.length === 0 && (
         <p className="text-gray-300">No properties yet.</p>
       )}
@@ -10,7 +10,7 @@ export default function Properties({ properties }) {
       {properties.map((property) => (
         <div
           key={property._id}
-          className="bg-sky-900 max-w-xs p-4 rounded-xl shadow-lg overflow-hidden"
+          className="bg-glass border border-white/10 shadow-xl max-w-xs p-4 rounded-xl shadow-lg overflow-hidden"
         >
           <img
             src={property.image}
@@ -19,10 +19,12 @@ export default function Properties({ properties }) {
           />
 
           <h3 className="text-md font-semibold ">{property.name}</h3>
-          <p className="text-gray-500">{property.city}</p>
+          <p className="text-gray-400">{property.city}</p>
 
-          <p className="text-lg font-bold mt-2">
-            ${property.pricePerNight} / night
+          <p className="text-md mt-2">
+            Price:{" "}
+            <span className="text-lg font-bold">{property.pricePerNight} </span>
+            / night
           </p>
 
           <Link
@@ -33,6 +35,6 @@ export default function Properties({ properties }) {
           </Link>
         </div>
       ))}
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router";
+
 import { UserContext } from "../../contexts/UserContext";
 import useForm from "../../hooks/useForm";
 
@@ -62,8 +63,7 @@ export default function Login() {
             <span>Password</span>
             <input
               type="password"
-              className="mt-2 w-full px-4 py-2  border rounded-lg focus:outline-none focus:ring
-             focus:ring-sky-300"
+              className="mt-2 w-full px-4 py-2  border rounded-lg focus:outline-none focus:ring focus:ring-sky-300"
               {...register("password")}
               required
             />

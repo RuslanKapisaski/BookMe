@@ -48,13 +48,12 @@ export default function AddProperty() {
       className="flex justify-center bg-cover bg-center bg-no-repeat
     min-h-screen "
       style={{
-        backgroundImage: "url('/images/add-property.webp')",
+        backgroundImage: "url('/images/property.webp')",
       }}
     >
       <form
         action={formAction}
-        className="min-w-100 m-20 bg-white/10 backdrop-blur-md  shadow-2xl rounded-xl p-4 ring-1 ring-white/10
-"
+        className="min-w-100 m-20 bg-white/10 backdrop-blur-md  shadow-2xl rounded-xl p-4 ring-1 ring-white/10"
       >
         <h2 className="text-2xl font-bold text-center mb-4 text-white">
           Add New Property
