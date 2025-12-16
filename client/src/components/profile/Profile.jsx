@@ -23,15 +23,16 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const [bookings, properties] = await Promise.all([
+      const [bookings, propertiesResponce] = await Promise.all([
         request(`/api/bookings/me`, "GET", null, {
           accessToken: user.accessToken,
         }),
         request(`/api/properties/owner`),
       ]);
+      const ownerProperties = propertiesResponce.properties;
 
       setBookings(bookings);
-      setProperties(properties);
+      setProperties(ownerProperties);
     };
 
     fetchUserData();
