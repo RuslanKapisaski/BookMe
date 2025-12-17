@@ -51,21 +51,17 @@ export default function Login() {
           <label className="block mb-6">
             <span>Email</span>
             <input
-              type="email"
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
               {...register("email")}
-              required
             />
           </label>
 
           <label className="block mb-6">
             <span>Password</span>
             <input
-              type="password"
               className="mt-2 w-full px-4 py-2  border rounded-lg focus:outline-none focus:ring focus:ring-sky-300"
               {...register("password")}
-              required
             />
           </label>
 
