@@ -16,8 +16,16 @@ export default function Register() {
     if (!username) {
       throw new Error("Username is required!");
     }
-    if (!email || !password) {
-      throw new Error("Email and password are required!");
+    if (!email) {
+      throw new Error("Email is required!");
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new Error("Invalid email!");
+    }
+
+    if (!password) {
+      throw new Error("Password is required!");
     }
 
     if (password !== repeatPassword) {
@@ -69,7 +77,6 @@ export default function Register() {
         <label className="block mb-3">
           <span>Email</span>
           <input
-            type="email"
             className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring
              focus:ring-sky-300"
             {...register("email")}
