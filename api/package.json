@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node  src/server.js",
-    "dev": "node --watch src/server.js"
+    "start": "node  src/api.js",
+    "dev": "node --watch src/api.js"
   },
   "type": "module",
   "author": "Ruslan Kapisaski",
